@@ -1,0 +1,116 @@
+---
+title: "prova 2"
+output: html_notebook
+---
+
+Pergunta 1
+Suppose I define the following function in R
+
+
+cube <- function(x, n) {
+        x^3
+}
+
+What is the result of running
+
+cube(3)
+
+
+```{r}
+
+cube <- function(x, n) {
+        x^3}
+cube(3)
+```
+Pergunta 2
+The following code will produce a warning in R.
+Why?
+
+
+```{r}
+x <- 1:10
+if(x > 5) {
+        x <- 0
+}
+```
+Pergunta 3
+Considere a seguinte função
+
+```{r}
+f <- function(x) {
+        g <- function(y) {
+                y + z
+        }
+        z <- 4
+        x + g(x)
+}
+```
+
+Se eu correr em R
+o que retorna 
+```{r}
+z <- 10
+f(3)
+```
+Pergunta 4
+Considere a seguinte expressão:
+Qual é o valor de 'y' após avaliar esta expressão?
+```{r}
+x <- 5
+y <- if(x < 3) {
+        NA
+} else {
+        10
+}
+y
+```
+Pergunta 5
+Consider the following R function
+Which symbol in the above function is a free variable?
+
+```{r}
+h <- function(x, y = NULL, d = 3L) {
+        z <- cbind(x, d)
+        if(!is.null(y))
+                z <- z + y
+        else
+                z <- z + f
+        g <- x + y / z
+        if(d == 3L)
+                return(g)
+        g <- g + 10
+        g
+}
+
+
+z
+g
+
+```
+
+Pergunta 6
+What is an environment in R?
+R: a collection of symbol/value pairs
+
+
+
+Pergunta 7
+The R language uses what type of scoping rule for resolving free variables?
+R: lexical scoping
+
+
+Pergunta 8
+How are free variables in R functions resolved?
+R: The values of free variables are searched for in the environment in which the function was defined
+
+
+Pergunta 9
+What is one of the consequences of the scoping rules used in R?
+R:All objects must be stored in memory
+
+
+
+Pergunta 10
+In R, what is the parent frame?
+R:It is the environment in which a function was called
+
