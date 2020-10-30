@@ -1,0 +1,77 @@
+---
+title: "Programming Assignment 3"
+---
+
+## Data Summary
+
+```{r, warning=FALSE}
+outcome <- read.csv("data/outcome-of-care-measures.csv", colClasses = "character")
+head(outcome)
+```
+
+
+```{r, warning=FALSE}
+str(outcome[,c(2,7,11,17,19,23)])
+```
+
+```{r, warning=FALSE}
+summary(outcome[,c(2,7,11,17,19,23)])
+```
+
+## 30-day mortality rates plot for heart attack
+
+```{r, warning=FALSE}
+outcome[, 11] <- as.numeric(outcome[, 11])
+## You may get a warning about NAs being introduced; that is okay
+hist(outcome[, 11])
+```
+
+
+## Finding the best hospital in a state
+
+```{r, warning=FALSE}
+source("best.R")
+```
+
+```{r, warning=FALSE}
+best("SC", "heart attack")
+```
+
+```{r, warning=FALSE}
+best("NY", "pneumonia")
+```
+
+```{r, warning=FALSE}
+best("AK", "pneumonia")
+```
+
+```{r, warning=FALSE}
+rankhospital("NC", "heart attack", "worst")
+```
+
+```{r, warning=FALSE}
+rankhospital("WA", "heart attack", 7)
+```
+
+```{r, warning=FALSE}
+rankhospital("TX", "pneumonia", 10)
+```
+
+```{r, warning=FALSE}
+rankhospital("NY", "heart attack", 7)
+```
+
+```{r, warning=FALSE}
+r <- rankall("heart attack", 4)
+as.character(subset(r, state == "HI")$hospital)
+```
+
+```{r, warning=FALSE}
+r <- rankall("pneumonia", "worst")
+as.character(subset(r, state == "NJ")$hospital)
+```
+
+```{r, warning=FALSE}
+r <- rankall("heart failure", 10)
+as.character(subset(r, state == "NV")$hospital)
+```
