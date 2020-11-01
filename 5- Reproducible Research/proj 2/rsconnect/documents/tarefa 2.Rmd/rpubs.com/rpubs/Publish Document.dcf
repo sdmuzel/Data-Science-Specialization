@@ -1,0 +1,10 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/684107/fabfff112b824172acb7cc0ba2fed912
+bundleId: https://api.rpubs.com/api/v1/document/684107/fabfff112b824172acb7cc0ba2fed912
+url: http://rpubs.com/sdmuzel/684107/edit
+when: 1604166434.23294

@@ -1,0 +1,212 @@
+---
+title: 'Part 2: Basic Inferential Data Analysis Instructions'
+output:
+  html_document:
+    keep_md: yes
+  pdf_document: default
+---
+
+# OVERVIEW
+
+In the second portion of the project, we're going to analyze the ToothGrowth data in the R datasets package
+
+```{r setup, include = FALSE}
+library(ggplot2)
+library(datasets)
+
+knitr::opts_chunk$set(echo = TRUE, fig.path='figures/')
+
+
+# disable scientific notation for numbers
+options(scipen = 1)
+```
+
+
+# DATA SUMMARY
+
+After loading the ToothGrowth dataset, provide a basic summary of the data.
+
+```{r basic-data-summary, echo = TRUE}
+
+# load the sample dataset containing ToothGrowth data
+data ("ToothGrowth")
+
+str(ToothGrowth)
+
+summary(ToothGrowth)
+
+```
+```{r}
+head(ToothGrowth, 10)
+```
+
+
+```{r}
+# tabulate delivery method and dosage level values
+table(ToothGrowth$supp, ToothGrowth$dose)
+```
+
+
+```{r}
+# summary of tooth length data grouped by delivery method and dosage level
+by(data = ToothGrowth$len, INDICES = list(ToothGrowth$supp, ToothGrowth$dose), summary)
+```
+
+
+```{r}
+```
+
+
+
+# EXPLORATORY DATA ANALYSIS
+
+Perform some basic exploratory data analyses of the data. The analyses will
+explore the following relations:
+
+1. Tooth Length as a function of Delivery Method
+2. Tooth Length as a function of Dosage Level
+3. Tooth Length as a function of Delivery Method (supp) and Dosage Level
+
+###  1- Tooth Length to Delivery Method
+
+```{r, echo = TRUE}
+
+
+levels(ToothGrowth$supp) <- c("Orange Juice", "Ascorbic Acid")
+
+ggplot(data = ToothGrowth, aes(x = supp, y = len)) + 
+    geom_boxplot(aes(fill = supp)) +
+    xlab("Delivery Method") +
+    ylab("Tooth Length") +
+    theme(plot.title = element_text(size = 15, hjust = 0.5)) +
+    ggtitle("Tooth Length as a Function of Delivery Method") 
+
+
+```
+### Findings
+
+Based on the graph, it is observed that, regardless of the dosage level, the use of orange juice as a method of administration had a more favorable effect on tooth growth than ascorbic acid.
+
+
+## 2- Tooth Length to Dosage Level
+
+```{r, echo = TRUE}
+
+ggplot(data = ToothGrowth, aes(x = factor(dose), y = len)) + 
+    geom_boxplot(aes(fill = factor(dose))) +
+    xlab("Dosage Level (mg/day)") +
+    ylab("Tooth Length") +
+    guides(fill=guide_legend(title="dose")) +
+    theme(plot.title = element_text(size = 15, hjust = 0.5)) +
+    ggtitle("Tooth Length as a Function of Dosage Level")
+
+```
+
+### Findings
+
+Based on the graph, it is observed that higher levels of vitamin C dosage, regardless of the method of administration, had a more favorable effect on tooth growth.
+
+
+
+## 3- Tooth Length to Delivery Method and Dosage Level
+
+```{r, echo = TRUE}
+
+
+levels(ToothGrowth$supp) <- c("Orange Juice", "Ascorbic Acid")
+
+ggplot(data = ToothGrowth, aes(x = supp, y = len)) + 
+    geom_boxplot(aes(fill = supp)) +
+    facet_wrap(~ dose) +
+    xlab("Delivery Method") +
+    ylab("Tooth Length") +
+    guides(fill=guide_legend(title="supp")) +
+    theme(plot.title = element_text(size = 14, hjust = 0.5, vjust = 0.5),
+          axis.text.x = element_text(angle = 45,
+                                     hjust = 0.5,
+                                     vjust = 0.5,
+                                     margin = margin(b = 10))) +
+    ggtitle("Tooth Length as a Function of\nDelivery Method and Dosage Level")
+
+```
+
+### Findings
+
+Based on the graph, for dosages of 0.5 to 1 mg/day, orange juice was better. As for the 2mg/day dosage by the median, there was no difference between the means of administration, however if we look at the quartiles, orange juice has a more robust result.
+
+
+
+## INFERENTIAL STATISTICS
+
+
+Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose. For this a t-test will be performed 
+crescimento do dente.
+
+### Hypothesis 1
+
+Test if whether is any correlation between tooth grow and dogase level  
+The null hypothesis that the two delivery methods have no effect on
+tooth growth.
+
+```{r, echo = TRUE}
+
+t.test(len ~ supp, data = ToothGrowth, conf.level = 0.95)
+
+```
+P-value is 0.06063 (>0.05)
+Confidence Interval is -0.17 to 7.57 (contains 0)
+This indicates weak evidence against the
+null hypothesis so we fail to reject the null hypothesis. So the dosage seems to have no impact on Tooth growth
+
+
+### Hypothesis 2
+
+Study the impact of delivery method on tooth growth for a single dosage level.
+A t-test will be performed by comparing Tooth Grow with Dose Amount looking at the different pairs of dose values
+
+```{r, echo = TRUE}
+
+# Dose amounts 0.5 and 1.0
+t.test(len~dose,data=subset(ToothGrowth, ToothGrowth$dose %in% c(1.0,0.5)))
+
+```
+P-value is 1.268e-07 (>0.05)
+Confidence Interval is -11.983781 to -6.276219 (doesn’t contains 0)
+Based on these results, it was found that between 0.05mg/day and 1 mg/day there is a difference in tooth growth
+
+
+
+```{r, echo = TRUE}
+
+# Dose amounts 0.5 and 2.0
+t.test(len~dose,data=subset(ToothGrowth, ToothGrowth$dose %in% c(2.0,0.5)))
+```
+P-value is 4.398e-14 (>0.05)
+Confidence Interval is -18.15617 to -12.83383 (doesn’t contains 0)
+Based on these results, it was found that between 0.05mg/day and 2mg/day there is a difference in tooth growth
+
+
+```{r, echo = TRUE}
+
+# Dose amounts 1.0 and 2.0
+t.test(len~dose,data=subset(ToothGrowth, ToothGrowth$dose %in% c(2.0,1.0)))
+
+```
+P-value is 0.00001906 (>0.05)
+Confidence Interval is -8.996481 to -3.733519 (doesn’tcontains 0)
+Based on these results, it was found that between 0.05mg/day and 1 mg/day there is a difference in tooth growth
+
+
+# CONCLUSION
+
+## Assumptions
+
+ - Tooth growth follows a normal distribution.
+
+ - The sample is representative of the population
+
+
+## Conclusions
+
+Based on exploratory data analysis and confirmed by hypothesis tests and associated confidence intervals, we can safely infer that an increase in dosage levels of vitamin C increases tooth growth. 
+However, the delivery method had any effect on tooth growth.
