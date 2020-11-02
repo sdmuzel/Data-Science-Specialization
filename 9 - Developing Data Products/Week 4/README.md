@@ -31,7 +31,7 @@ about your application.
 https://github.com/sdmuzel/Data-Science-Specialization/tree/master/9%20-%20Developing%20Data%20Products/Week%204/shiny-app//
 
 
-* Shiny application available on shinyapps.io: <a href="https://jhunter.shinyapps.io/develop-data-products-week-4-project/">https://jhunter.shinyapps.io/develop-data-products-week-4-project/</a>
+* Shiny application available on shinyapps.io: <a href="https://sdmuzel.shinyapps.io/shiny-app/">https://sdmuzel.shinyapps.io/shiny-app/</a>
 
 
 * Presentation available on RPubs: <a href="http://rpubs.com/OracleJavaNet/505533">http://rpubs.com/OracleJavaNet/505533</a>
