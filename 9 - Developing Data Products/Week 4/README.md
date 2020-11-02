@@ -1,4 +1,4 @@
-# Developing Data Products Course Project 3
+# Developing Data Products- Week 4
 
 This repository contains the source files for a two part peer-graded assignment
 for the Developing Data Products course as part of the Data Science
