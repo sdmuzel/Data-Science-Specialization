@@ -31,4 +31,4 @@ about your application.
 * Shiny application available on shinyapps.io: <a href="https://sdmuzel.shinyapps.io/shiny-app/">https://sdmuzel.shinyapps.io/shiny-app/</a>
 
 
-* Presentation available on RPubs: <a href="http://rpubs.com/OracleJavaNet/505533">http://rpubs.com/OracleJavaNet/505533</a>
+* Presentation available on RPubs: <a href="https://rpubs.com/OracleJavaNet/505533">https://rpubs.com/OracleJavaNet/505533</a>
