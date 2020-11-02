@@ -28,9 +28,6 @@ about your application.
 * Source files available on GitHub: <a href="https://github.com/sdmuzel/Data-Science-Specialization/tree/master/9%20-%20Developing%20Data%20Products/Week%204">https://github.com/sdmuzel/Data-Science-Specialization/tree/master/9%20-%20Developing%20Data%20Products/Week%204</a>
 
 
-https://github.com/sdmuzel/Data-Science-Specialization/tree/master/9%20-%20Developing%20Data%20Products/Week%204/shiny-app//
-
-
 * Shiny application available on shinyapps.io: <a href="https://sdmuzel.shinyapps.io/shiny-app/">https://sdmuzel.shinyapps.io/shiny-app/</a>
 
 
