@@ -30,11 +30,27 @@ linear regression modeling techniques to estimate fuel consumption (MPG) in 32
 automobiles (1973-74 models) based on 11 aspects of automobile design and
 performance.
 
-## About the Data Set
+## Variables
 
-The mtcars dataset is comprised of data that was was extracted from the 1974
-Motor Trend US magazine, and comprises fuel consumption and 11 aspects of
-automobile design and performance for 32 automobiles (1973-74 models).
+Miles/(US) gallon
+Number of cylinders
+Displacement (cu.in.)
+Gross horsepower,
+Rear axle ratio
+Weight (1000 lbs)
+1/4 mile time"),
+Engine (0 = V-shaped, 1 = straight)"),
+Transmission (0 = automatic, 1 = manual)
+Number of forward gears
+Number of carburetors")
 
-The mtcars dataset is a data frame with 32 observations on 11 (numeric)
-variables.
+
+## R code
+
+```{r, echo=FALSE,  out.width = '100%'}
+# add figure
+knitr::include_graphics("codigo.png")
+
+```
+
+
