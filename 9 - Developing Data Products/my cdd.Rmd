@@ -2,7 +2,10 @@
 title: "My First Leaflet Map"
 output:
   html_document:
+    
     df_print: paged
+  keep_md: yes
+  pdf_document: default
 ---
 
 ```{r}
@@ -18,7 +21,7 @@ build an interactive map of my hometown.
 
 m <- leaflet() %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=-48.876050, lat=-23.981730, popup="The birthplace of R")
+  addMarkers(lng=-48.876050, lat=-23.981730, popup="My Hometown")
 m  # Print the map
 ```
 
