@@ -1,0 +1,12 @@
+name: shiny-app
+title: shiny-app
+username:
+account: sdmuzel
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3146017
+bundleId: 3811551
+url: https://sdmuzel.shinyapps.io/shiny-app/
+when: 1604336197.02054
+asMultiple: FALSE
+asStatic: FALSE

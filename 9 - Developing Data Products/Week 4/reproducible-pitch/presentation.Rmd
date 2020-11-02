@@ -1,7 +1,6 @@
 ---
-title: "Developing Data Products<br>Course Project<br>Week 4"
-author: "Jeffrey M. Hunter"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+title: "Developing Data Products - Week 4"
+date: 02/11/2020
 output: ioslides_presentation
 ---
 
@@ -10,16 +9,6 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Synopsis
-
-This project was created for the Developing Data Products course as part of the
-Data Science Specialization offered through Coursera from Johns Hopkins
-University.
-
-The source code files for this project can be found on GitHub:
-
-<a target="_blank" href="https://github.com/oraclejavanet/developing-data-products-course-project-3">https://github.com/oraclejavanet/developing-data-products-course-project-3</a>
-
-## Course Project
 
 The course project is a two part peer-graded assignment:
 
@@ -32,7 +21,7 @@ The name of the Shiny application developed for this project is the
 **Motor Trend Data Analysis Application** and is hosted on RStudio's
 shinyapps.io hosted service:
 
-<a target="_blank" href="https://jhunter.shinyapps.io/develop-data-products-week-4-project/">https://jhunter.shinyapps.io/develop-data-products-week-4-project/</a>
+<a target="_blank" href="https://sdmuzel.shinyapps.io/shiny-app/">https://sdmuzel.shinyapps.io/shiny-app/</a>
 
 ## Motor Trend Data Analysis Application
 
