@@ -1,0 +1,24 @@
+---
+title: "My First Leaflet Map"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library(leaflet)
+```
+
+# November 02, 2020
+
+
+The page was built in RStudio using R Markdown and the Leaflet package to
+build an interactive map of my hometown.
+```{r}
+
+m <- leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=-48.876050, lat=-23.981730, popup="The birthplace of R")
+m  # Print the map
+```
+
