@@ -66,7 +66,8 @@ shinyUI(
                             "The source code for this application can be found
                             on GitHub:",
                             br(),br(),
-                           
+                            a(href = "https://github.com/oraclejavanet/developing-data-products-course-project-3/tree/master/shiny-app/",
+                            "https://github.com/oraclejavanet/developing-data-products-course-project-3/tree/master/shiny-app/"))
                )
     )
 )
