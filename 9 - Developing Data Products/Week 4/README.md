@@ -1,13 +1,5 @@
 # Developing Data Products Course Project 3
 
-**Jeffrey M. Hunter**
-
-June 16, 2019
-
-## Course Project
-
-#### Week 4
-
 This repository contains the source files for a two part peer-graded assignment
 for the Developing Data Products course as part of the Data Science
 Specialization offered through Coursera from Johns Hopkins University.
@@ -33,6 +25,13 @@ about your application.
 
 #### Links
 
-* Source files available on GitHub: <a href="https://github.com/oraclejavanet/developing-data-products-course-project-3/">https://github.com/oraclejavanet/developing-data-products-course-project-3/</a>
+* Source files available on GitHub: <a href="https://github.com/sdmuzel/Data-Science-Specialization/tree/master/9%20-%20Developing%20Data%20Products/Week%204">https://github.com/sdmuzel/Data-Science-Specialization/tree/master/9%20-%20Developing%20Data%20Products/Week%204</a>
+
+
+https://github.com/sdmuzel/Data-Science-Specialization/tree/master/9%20-%20Developing%20Data%20Products/Week%204/shiny-app//
+
+
 * Shiny application available on shinyapps.io: <a href="https://jhunter.shinyapps.io/develop-data-products-week-4-project/">https://jhunter.shinyapps.io/develop-data-products-week-4-project/</a>
+
+
 * Presentation available on RPubs: <a href="http://rpubs.com/OracleJavaNet/505533">http://rpubs.com/OracleJavaNet/505533</a>
