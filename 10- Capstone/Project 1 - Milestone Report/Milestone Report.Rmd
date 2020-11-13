@@ -1,0 +1,199 @@
+---
+title: "Milestone Report"
+date: "12/11/2020"
+output: html_document
+---
+
+
+# Overview
+
+In this capstone project will be applying data science in the area of natural language processing (NLP).
+
+The milestone report describes exploratory data analysis performed with the course data set.
+
+The data is from a corpus called HC Corpora and it contains texts collected from blogs, twitter and newsr: https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip
+
+# Exploratory Data Analysis
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ggplot2) 
+library(kableExtra)
+library(knitr)
+library(tm)
+library(SnowballC)
+library(wordcloud)
+library(stringi)
+library(tidytext)
+library(dplyr)
+library(RWekajars)
+library(RWeka)
+
+# read the text data
+DT_blog <- readLines("en_US.blogs.txt")
+DT_news <- readLines("en_US.news.txt")
+DT_twitter <- readLines("en_US.twitter.txt")
+
+```
+
+
+The summary of the data files is shown below
+
+```{r}
+# summarize information about the data files
+summary_DT <- data.frame(filename = c("en_US.blogs.txt","en_US.news.txt","en_US.twitter.txt"),
+                         size = c(format(object.size(DT_blog), units = "auto"), 
+                                  format(object.size(DT_news), units = "auto"), 
+                                  format(object.size(DT_twitter), units = "auto")),
+                         lines = c(length(DT_blog),length(DT_news),length(DT_twitter)))
+# summary table
+summary_DT %>%
+  kable("html") %>%
+  kable_styling()
+```
+
+# Creating the sample data set
+
+To avoid performance problems, a random sampling of the data set was performed
+
+```{r, echo=FALSE}
+
+# subset the data
+set.seed(123)
+sample_blog <- sample(DT_blog, length(DT_blog) * 0.01)
+sample_news <- sample(DT_news, length(DT_news) * 0.01)
+sample_twitter <- sample(DT_twitter, length(DT_twitter) * 0.01)
+
+# combine subsets together
+text_sample  <- c(sample_blog, sample_news, sample_twitter)
+
+```
+
+# Cleaning and preprocessing
+
+To create a corpus and then we perform following steps to clean and simplify the data:
+
+ - Makes all character in lower case.
+ - Removes numbers.
+ - Removes punctuation.
+ - Removes extra whitespaces.
+ - Removes Non-ASCII characters.
+ - Remove stop words.
+ - Perform stemming
+ - Remove profanity words
+
+```{r, message = FALSE, echo = FALSE}
+
+# create a corpus
+sampleCorpus <- Corpus(VectorSource(text_sample))
+
+# create a plain text document
+sampleCorpus <- tm_map(sampleCorpus, PlainTextDocument)
+
+# lower case
+sampleCorpus <- tm_map(sampleCorpus, content_transformer(tolower))
+# remove numbers
+sampleCorpus <- tm_map(sampleCorpus, removeNumbers)
+# remove ounctuations
+sampleCorpus <- tm_map(sampleCorpus, removePunctuation)
+# remove extra whitespaces
+sampleCorpus <- tm_map(sampleCorpus, stripWhitespace)
+# remove all non-ASCII chars
+sampleCorpus <- tm_map(sampleCorpus, function(x) iconv(x, "latin1", "ASCII", sub=""))
+# remove stop words
+sampleCorpus <- tm_map(sampleCorpus,removeWords,stopwords("en"))
+# stemming
+sampleCorpus <- tm_map(sampleCorpus, stemDocument)
+
+```
+
+
+```{r}
+corpus <- VCorpus(VectorSource(text_sample))
+toSpace <- content_transformer(function(x, pattern) gsub(pattern, " ", x))
+corpus <- tm_map(corpus, toSpace, "(f|ht)tp(s?)://(.*)[.][a-z]+")
+corpus <- tm_map(corpus, toSpace, "@[^\\s]+")
+corpus <- tm_map(corpus, tolower)
+corpus <- tm_map(corpus, removeWords, stopwords("en"))
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, removeNumbers)
+corpus <- tm_map(corpus, stripWhitespace)
+corpus <- tm_map(corpus, PlainTextDocument)
+
+```
+
+
+# Tokenization
+
+Tokenization to break sentences and phrases in to pairs of words or n-grams. Essentially breaking down units of words or tokens, hence the term tokenization.
+
+N-grams are used to understand relationships between words, they define how often word A is followed by word B.
+
+ - Unigrams are single words. 
+ - Bigrams are two words combinations. 
+ - Trigrams are three-word combinations.
+
+
+## Unigrams
+
+```{r, message = FALSE, echo = FALSE}
+unigram <- NGramTokenizer(sampleCorpus, Weka_control(min = 1, max = 1))
+
+unigram <- data.frame(table(unigram))
+unigram <- unigram[order(unigram$Freq,decreasing = TRUE),]
+
+names(unigram) <- c("word1", "freq")
+head(unigram)
+```
+
+
+
+```{r}
+wordcloud(sampleCorpus, max.words = 50, random.order = FALSE, colors=brewer.pal(8,"Dark2"))
+
+```
+
+## Bigrams
+
+```{r, message = FALSE, echo = FALSE}
+options(mc.cores=1)
+
+getFreq <- function(tdm) {
+  freq <- sort(rowSums(as.matrix(tdm)), decreasing = TRUE)
+  return(data.frame(word = names(freq), freq = freq))
+}
+bigram <- function(x) NGramTokenizer(x, Weka_control(min = 2, max = 2))
+trigram <- function(x) NGramTokenizer(x, Weka_control(min = 3, max = 3))
+makePlot <- function(data, label) {
+  ggplot(data[1:30,], aes(reorder(word, -freq), freq)) +
+         labs(x = label, y = "Frequency") +
+         theme(axis.text.x = element_text(angle = 60, size = 12, hjust = 1)) +
+         geom_bar(stat = "identity", fill = I("grey50"))
+}
+
+# Get frequencies of most common n-grams in data sample
+freq2 <- getFreq(removeSparseTerms(TermDocumentMatrix(corpus, control = list(tokenize = bigram)), 0.9999))
+freq3 <- getFreq(removeSparseTerms(TermDocumentMatrix(corpus, control = list(tokenize = trigram)), 0.9999))
+```
+
+
+```{r}
+makePlot(freq2, "30 Most Common Bigrams")
+```
+
+
+
+## Trigrams
+
+
+```{r}
+makePlot(freq3, "30 Most Common Trigrams")
+```
+
+
+# Next 
+
+I do exploratory analysis initially. 
+The next steps of this capstone project would be to finalize our predictive algorithm, and deploy our algorithm using shiny() app. 
+As for the Shiny app it will consist of a simple user interface that will allow a user to enter text into a single textbox.
