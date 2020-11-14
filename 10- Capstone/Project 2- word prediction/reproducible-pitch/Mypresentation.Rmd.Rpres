@@ -49,7 +49,7 @@ The predictive text model was built from a sample of
 800,000 lines extracted from the large corpus of blogs,
 news and twitter data.
 
-The sample data was then
+ - The sample data was then
 tokenized and cleaned using the **tm** package and a number
 of regular expressions using the **gsub** function. As
 part of the cleaning process the data was converted to
@@ -80,7 +80,7 @@ next words.
 
 ```{r, echo=FALSE,  out.width = '70%'}
 # add figure
-knitr::include_graphics("imagem.png")
+knitr::include_graphics("app.png")
 
 ```
 

@@ -46,7 +46,7 @@ The predictive text model was built from a sample of
 800,000 lines extracted from the large corpus of blogs,
 news and twitter data.
 
-The sample data was then
+ - The sample data was then
 tokenized and cleaned using the **tm** package and a number
 of regular expressions using the **gsub** function. As
 part of the cleaning process the data was converted to
@@ -75,5 +75,5 @@ shown first followed by the second and third likely
 next words. 
 </small>
 
-<img src="imagem.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="70%" />
+<img src="app.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="70%" />
 
